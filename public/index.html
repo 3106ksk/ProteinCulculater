@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タンパク質計算</title>
+  <meta name="description" conte="text text text">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <h1 id="title">タンパク質計算</h1>
+
+<!-- リスト追加、除去 -->
+  <button type="button" id="button-add">行を追加</button>
+  <button type="button" id="button-clear">行を除去</button>
+
+  <div class="list-box">
+    <h2>リスト追加</h2>
+  </div>
+
+  <table border="1" id="calculationTable">
+    <tr>
+      <th>食材名</th>
+      <th>タンパク質</th>
+    </tr>
+
+    <tr id="item0">
+      <td>
+        <div class="relative">
+          <div class="ingredientBox"><input type="text" placeholder="食材名"></div>
+          <div class="amoutBox">
+            <p class="amount inline-block">
+              <input type="text" id="ingredient0Amount">
+            </p>
+            <p class="inline-block">g</p>
+          </div>
+        </div>
+      </td>
+      <td class="result Protein">
+        <input readonly tabindex="-1" type="text" id="ingredient0Protein" name="ingredientProtein-0">
+      </td>
+    </tr>
+    
+    <tr id="resultProtein">
+      <td>1日の摂取タンパク質量</td>
+      <td class="result total Protein">
+        <input readonly tabindex="1" type="text">
+        <p>g</p>
+      </td>
+    </tr>
+  </table>
+
+<script src="app.js"></script>
+
+
+
+</body>
+
+
+
+</html>

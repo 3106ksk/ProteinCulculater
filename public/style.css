@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+h1#title {
+  background-color: aqua;
+  margin-right: 400px;
+  margin-left: 200px;
+}
+
+
+.calculationTable {
+  width: 100%;
+  table-layout: fixed;
+  line-height: 1.2;
+  box-sizing: border-box;
+}
