@@ -1,15 +1,62 @@
-@charset "utf-8";
-
-h1#title {
-  background-color: aqua;
-  margin-right: 400px;
-  margin-left: 200px;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #333;
 }
 
+header {
+  background-color: #009688;
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
+}
 
-.calculationTable {
+header h1 {
+  margin: 0;
+  padding: 0;
+}
+
+#input-section, #ingredient-list-section, #result-section {
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#ingredient-list-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+#ingredient-list-section li {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+button {
+  background-color: #00796B;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #005b4f;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #009688;
+  color: white;
+  position: relative;
+  bottom: 0;
   width: 100%;
-  table-layout: fixed;
-  line-height: 1.2;
-  box-sizing: border-box;
 }

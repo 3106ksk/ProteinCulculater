@@ -1,61 +1,53 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>タンパク質計算</title>
-  <meta name="description" conte="text text text">
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タンパク質計算アプリ</title>
+    <link rel="stylesheet" href="./style.css">
+
+
 </head>
 <body>
-  <h1 id="title">タンパク質計算</h1>
+    <header>
+        <h1>タンパク質計算アプリ</h1>
+        <p>食材のタンパク質を簡単計算</p>
+    </header>
 
-<!-- リスト追加、除去 -->
-  <button type="button" id="button-add">行を追加</button>
-  <button type="button" id="button-clear">行を除去</button>
-
-  <div class="list-box">
-    <h2>リスト追加</h2>
-  </div>
-
-  <table border="1" id="calculationTable">
-    <tr>
-      <th>食材名</th>
-      <th>タンパク質</th>
-    </tr>
-
-    <tr id="item0">
-      <td>
-        <div class="relative">
-          <div class="ingredientBox"><input type="text" placeholder="食材名"></div>
-          <div class="amoutBox">
-            <p class="amount inline-block">
-              <input type="text" id="ingredient0Amount">
-            </p>
-            <p class="inline-block">g</p>
-          </div>
+    <section id="input-section">
+        <h2>食材の追加</h2>
+        <div>
+            <label for="ingredient-input">食材の選択:</label>
+            <input type="text" id="ingredient-input" placeholder="食材名を入力">
         </div>
-      </td>
-      <td class="result Protein">
-        <input readonly tabindex="-1" type="text" id="ingredient0Protein" name="ingredientProtein-0">
-      </td>
-    </tr>
+        <div>
+            <label for="amount-input">量の入力:</label>
+            <input type="number" id="amount-input" placeholder="グラム">
+        </div>
+
+        <button id="add-button">追加</button>
+    </section>
+
+    <section id="ingredient-list-section">
+        <h2>追加した食材リスト</h2>
+        <ul id="ingredient-list">
+        </ul>
+    </section>
+
+    <button id="calculate-button">計算開始</button>
+
+    <section id="result-section">
+        <h2>計算結果</h2>
+        <p id="total-protein">タンパク質の総量: </p>
+        <!-- 詳細情報がここに表示される -->
+    </section>
+
+    <footer>
+        <p>アプリに関する情報や、使用方法、お問い合わせはこちら</p>
+        <!-- クレジットやリンクがここに追加される -->
+    </footer>
+
+    <script src="app.js"></script>
     
-    <tr id="resultProtein">
-      <td>1日の摂取タンパク質量</td>
-      <td class="result total Protein">
-        <input readonly tabindex="1" type="text">
-        <p>g</p>
-      </td>
-    </tr>
-  </table>
-
-<script src="app.js"></script>
-
-
-
 </body>
-
-
-
 </html>
