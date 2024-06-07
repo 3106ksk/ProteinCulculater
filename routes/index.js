@@ -2,9 +2,6 @@ const router = require('express').Router();
 
 
 router.get('/', (req,res) => {
-  res.end('ユーザーです');
+  res.render("./index.ejs");
 });
-
-
-
 module.exports = router;
