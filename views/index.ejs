@@ -1,50 +1,56 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>タンパク質計算アプリ</title>
+    <title>Protein Calculation App</title>
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <header>
-        <h1>タンパク質計算アプリ</h1>
-        <p>食材のタンパク質を簡単計算</p>
+        <h1>Protein Calculation App</h1>
+        <p>Easy calculation of protein content in food</p>
     </header>
 
     <section id="input-section">
-        <h2>食材の追加</h2>
+        <h2>Add Ingredients</h2>
         <div>
-            <label for="ingredient-input">食材の選択:</label>
-            <select id="ingredient-input">
-                <option value="">食材を選択してください</option>
-                <!-- 食材のオプションはJavaScriptで動的に追加されます -->
+            <label for="category-select"></label>
+            <select id="category-select">
+                <option value="">--Select Category--</option>
             </select>
         </div>
         <div>
-            <label for="amount-input">量の入力:</label>
-            <input type="number" id="amount-input" placeholder="グラム">
+            <label for="ingredient-input">Select Ingredient:</label>
+            <select id="ingredient-input">
+                <option value="">Please select an ingredient</option>
+                <!-- Food options will be dynamically added by JavaScript -->
+            </select>
+        </div>
+        <div>
+            <label for="amount-input">Amount:</label>
+            <input type="number" id="amount-input" placeholder="grams">
         </div>
 
-        <button id="add-button">追加</button>
+        <button id="add-button">Add</button>
     </section>
 
     <section id="ingredient-list-section">
-        <h2>追加した食材リスト</h2>
+        <h2>Added Ingredients</h2>
         <ul id="ingredient-list">
         </ul>
     </section>
 
     <section id="result-section">
-        <h2>計算結果</h2>
-        <p id="total-protein">タンパク質の総量: </p>
-        <!-- 詳細情報がここに表示される -->
+        <h2>Calculation Results</h2>
+        <p id="total-protein">Total Protein: </p>
+        <!-- Detailed information will be displayed here -->
     </section>
 
     <footer>
-        <p>アプリに関する情報や、使用方法、お問い合わせはこちら</p>
-        <!-- クレジットやリンクがここに追加される -->
+        <p>For information about the app, usage instructions, and inquiries, click here</p>
+        <!-- Credits and links will be added here -->
     </footer>
 
     <script src="/index.js"></script>
