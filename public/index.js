@@ -1,79 +1,82 @@
-let foodData;
-let totalProteinAmount;
+let foodsByCategory = {};
+let totalProtein = 0;
+const selectedFoods = {};
 
 document.addEventListener('DOMContentLoaded', () => {
-  // API Categories
-  const categorySelectElement = document.getElementById('category-select');
+  const categorySelect = document.getElementById('category-select');
+  const foodSelect = document.getElementById('ingredient-input');
+  const addFoodButton = document.getElementById('add-button');
+  const foodListElement = document.getElementById('ingredient-list');
 
+  // カテゴリーのデータを取得
   axios.get('/api/categories')
     .then(response => {
       const categories = response.data;
       categories.forEach(category => {
-        const optionElement = document.createElement('option');
-        optionElement.value = category.id;
-        optionElement.textContent = category.name;
-        categorySelectElement.appendChild(optionElement);
+        const option = document.createElement('option');
+        option.value = category.id;
+        option.textContent = category.name;
+        categorySelect.appendChild(option);
       });
     })
     .catch(error => console.error('Error fetching categories:', error));
 
-  categorySelectElement.addEventListener('change', () => {
-    const selectedCategoryId = parseInt(categorySelectElement.value);
-    const foodSelectElement = document.getElementById('ingredient-input');
-    foodSelectElement.textContent = "";
+  // カテゴリーが変更されたときの処理
+  categorySelect.addEventListener('change', () => {
+    const selectedCategoryId = parseInt(categorySelect.value);
+    foodSelect.textContent = "";
 
     axios.get(`/api/foods?category=${selectedCategoryId}`)
       .then(response => {
-        foodData = response.data;
-        console.log(foodData);
-        foodData.filter(food => food.category === selectedCategoryId).forEach(foodItem => {
-          const optionElement = document.createElement('option');
-          optionElement.value = foodItem.food_name;
-          optionElement.textContent = `${foodItem.food_name} (${foodItem.protein}g/100g)`;
-          foodSelectElement.appendChild(optionElement);
-          console.log(foodSelectElement);
+        foodsByCategory[selectedCategoryId] = response.data;
+        foodsByCategory[selectedCategoryId].forEach(foodItem => {
+          const option = document.createElement('option');
+          option.value = foodItem.food_name;
+          option.textContent = `${foodItem.food_name} (${foodItem.protein}g/100g)`;
+          foodSelect.appendChild(option);
         });
       })
       .catch(error => console.error('Error fetching food list:', error));
   });
-});
 
-const addButton = document.getElementById('add-button');
-const foodListElement = document.getElementById('ingredient-list');
-let selectedFoodList = [];
+  // 食材をリストに追加する処理
+  addFoodButton.addEventListener('click', function () {
+    const selectedCategoryId = parseInt(categorySelect.value);
+    const selectedFoodName = foodSelect.value;
+    const selectedFoodText = foodSelect.options[foodSelect.selectedIndex].text;
+    const selectedFoodAmount = parseInt(amountInput.value);
 
-addButton.addEventListener('click', function () {
-  const foodSelectElement = document.getElementById('ingredient-input');
-  const amountInputElement = document.getElementById('amount-input');
-  const selectedFoodName = foodSelectElement.value;
-  const selectedFoodText = foodSelectElement.options[foodSelectElement.selectedIndex].text;
-  const selectedFoodAmount = parseInt(amountInputElement.value);
+    if (selectedFoodName && selectedFoodAmount) {
+      if (!selectedFoods[selectedCategoryId]) {
+        selectedFoods[selectedCategoryId] = [];
+      }
+      selectedFoods[selectedCategoryId].push({ name: selectedFoodName, amount: selectedFoodAmount, categoryId: selectedCategoryId });
+      
+      const listItem = document.createElement('li');
+      listItem.textContent = `${selectedFoodText} 摂取量:${selectedFoodAmount}g`;
+      foodListElement.appendChild(listItem);
 
-  if (selectedFoodName && selectedFoodAmount) {
-    selectedFoodList.push({ name: selectedFoodName, amount: selectedFoodAmount });
-    const listItemElement = document.createElement('li');
-    listItemElement.textContent = `${selectedFoodText} 摂取量:${selectedFoodAmount}g`;
-    console.log(selectedFoodList);
-    foodListElement.appendChild(listItemElement);
-
-    // Automatic calculate
-    calculateTotalProtein(selectedFoodList);
-  } else {
-    alert('食材名と量を入力してください');
-  }
-});
-
-// Functions
-function calculateTotalProtein(selectedFoodList) {
-  let totalProtein = 0;
-  selectedFoodList.forEach(food => {
-    const foodItem = foodData.find(item => item.food_name === food.name);
-    if (foodItem) {
-      totalProtein += (food.amount / 100) * foodItem.protein;
+      // タンパク質の自動計算
+      calculateTotalProtein();
+    } else {
+      alert('食材名と量を入力してください');
     }
   });
+});
 
-  let totalProteinDisplayElement = document.getElementById('total-protein');
+// タンパク質の総量を計算する関数
+function calculateTotalProtein() {
+  let totalProtein = 0;
+  Object.values(selectedFoods).forEach(foodList => {
+    foodList.forEach(food => {
+      const foodItem = foodsByCategory[parseInt(food.categoryId)].find(item => item.food_name === food.name);
+      if (foodItem) {
+        totalProtein += (food.amount / 100) * foodItem.protein;
+      }
+    });
+  });
+
+  const totalProteinDisplayElement = document.getElementById('total-protein');
   totalProteinDisplayElement.textContent = `タンパク質の総量: ${totalProtein.toFixed(2)}g`;
   console.log(`Updated total protein: ${totalProtein.toFixed(2)}g`);
 }
