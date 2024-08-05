@@ -5,3 +5,4 @@ module.exports = {
   PASSWORD: process.env.MYSQL_PASSWORD || "3106kmkaio",
   DATABASE: process.env.MYSQL_DATABASE || "food_protein"
 };
+
