@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     axios.get(`/api/foods?category=${selectedCategoryId}`)
       .then(response => {
         foodDataByCategory[selectedCategoryId] = response.data;
-        console.log(foodDataByCategory[selectedCategoryId]);
         foodDataByCategory[selectedCategoryId].forEach(foodItem => {
           const optionElement = document.createElement('option');
           optionElement.value = foodItem.food_name;
